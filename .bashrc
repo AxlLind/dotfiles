@@ -24,9 +24,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias l='ls -CF'
-alias ll='ls -lah'
-alias ls='ls --color=auto'
+alias cat='bat --paging=never'
+alias ls='exa'
+alias ll='exa -lah'
 alias grep='grep --color=auto'
 alias gs='git status'
 alias gd='git diff'
