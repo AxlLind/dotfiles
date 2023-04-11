@@ -52,9 +52,9 @@ axl_prompt() {
     ERR_CODE="$NOCOLOR : $RED$1"
   fi
 
-  local GIT_PROMPT=$(__git_ps1 '(%s)')
-  if [[ -n "$GIT_PROMPT" ]]; then
-    GIT_PROMPT=" $GREEN$GIT_PROMPT"
+  local GIT_STATUS=$(__git_ps1 %s)
+  if [[ -n "$GIT_STATUS" ]]; then
+    GIT_STATUS=" $GREEN($GIT_STATUS)"
   fi
 
   IFS='[;' read -rsd R -p $'\e[6n' _ _ COL
@@ -63,7 +63,7 @@ axl_prompt() {
   fi
 
   printf "%0.s " $(seq 1 $(($(tput cols) - 10)))
-  echo "${CYAN}[$(date +'%R:%S')]\r$MAGENTA[\w]$GIT_PROMPT$ERR_CODE"
+  echo "${CYAN}[$(date +'%R:%S')]\r$MAGENTA[\w]$GIT_STATUS$ERR_CODE"
   echo "$YELLOWλ$NOCOLOR "
 }
 export PROMPT_DIRTRIM=7
