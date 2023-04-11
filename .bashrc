@@ -12,6 +12,9 @@ shopt -s histappend
 shopt -s checkwinsize
 shopt -s globstar
 shopt -s autocd
+bind 'set completion-ignore-case on'
+bind -r '\C-s'
+stty -ixon
 
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -20,7 +23,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-. "$HOME/.cargo/env"
 
 alias l='ls -CF'
 alias ll='ls -lah'
@@ -37,13 +39,13 @@ alias .......='cd ../../../../../..'
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export EDITOR=vim
 
-my_prompt() {
-  local RED="\e[31m"
-  local GREEN="\e[32m"
-  local YELLOW="\e[33m"
-  local MAGENTA="\e[35m"
-  local CYAN="\e[36m"
-  local NOCOLOR="\e[0m"
+axl_prompt() {
+  local RED="\[\e[31m\]"
+  local GREEN="\[\e[32m\]"
+  local YELLOW="\[\e[33m\]"
+  local MAGENTA="\[\e[35m\]"
+  local CYAN="\[\e[36m\]"
+  local NOCOLOR="\[\e[0m\]"
 
   local ERR_CODE=""
   if [[ $1 != 0 ]]; then
@@ -61,13 +63,10 @@ my_prompt() {
   fi
 
   printf "%0.s " $(seq 1 $(($(tput cols) - 10)))
-  echo -e "${CYAN}[$(date +'%R:%S')]\r$MAGENTA[\w]$GIT_PROMPT$ERR_CODE"
+  echo "${CYAN}[$(date +'%R:%S')]\r$MAGENTA[\w]$GIT_PROMPT$ERR_CODE"
   echo "$YELLOWλ$NOCOLOR "
 }
 export PROMPT_DIRTRIM=7
-export PROMPT_COMMAND='export PS1=$(my_prompt $?)'
+export PROMPT_COMMAND='export PS1=$(axl_prompt $?)'
 
-bind -r '\C-s'
-stty -ixon
-
-bind 'set completion-ignore-case on'
+. "$HOME/.cargo/env"
