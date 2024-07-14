@@ -24,7 +24,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias cat='bat --paging=never'
+alias cat='batcat --paging=never'
 alias ls='exa'
 alias ll='exa -lah'
 alias grep='grep --color=auto'
