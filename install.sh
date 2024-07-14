@@ -8,7 +8,7 @@ sudo apt install -y $(cat packages.txt)
 
 set -x
 mkdir -p ~/.vim/colors
-cp .vim/colors/* ~/.vim/colors
+cp .vim/colors/snazzy.vim ~/.vim/colors
 cp .bashrc ~
 cp .vimrc ~
 cp .global.gitignore ~
