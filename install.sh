@@ -12,3 +12,5 @@ cp .vim/colors/snazzy.vim ~/.vim/colors
 cp .bashrc ~
 cp .vimrc ~
 cp .global.gitignore ~
+
+git config --global core.excludesfile ~/.global.gitignore
